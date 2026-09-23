@@ -1,0 +1,65 @@
+{
+  "chainId": 4663,
+  "contract": "MeowRouterRegistry",
+  "address": "0x7b592Bf516cE94AE28e24e34d709Cb95fE596005",
+  "owner": "0x7E4CEFA712BB2080623b96fEf6c1d327FC965553",
+  "deployer": "0x7E4CEFA712BB2080623b96fEf6c1d327FC965553",
+  "transactionHash": "0x464a93a5be15cfee1c0b532af746bf14ff3ac5792b92b9f9f81de43c6bfe68d7",
+  "blockNumber": 70680538,
+  "blockHash": "0x93ce93d40b08da6c1b9f0fc9fc41751889044918ff476cf47f72c24334c648e5",
+  "gasUsed": 1580797,
+  "effectiveGasPriceWei": 51504000,
+  "compiler": "0.8.26",
+  "optimizerRuns": 100,
+  "evmVersion": "cancun",
+  "runtimeCodeHash": "0x608f3c61a5d52280f9a219b3f0989ce3c19a7944c1600b048b1a7e026a3015be",
+  "runtimeMatchesBuild": true,
+  "seeds": [
+    {
+      "router": "0x6493A49d5b5C5Befe60d6EC7F633fd317545DdDC",
+      "fromBlock": 33693446,
+      "retiredBlock": 45247551,
+      "abiVersion": 1,
+      "label": "HoodAggregator v1"
+    },
+    {
+      "router": "0xcBA20B3109Ef4944dEAFc265B4b3D38316A3a17a",
+      "fromBlock": 45247551,
+      "retiredBlock": 50882472,
+      "abiVersion": 1,
+      "label": "HoodAggregator native-v4"
+    },
+    {
+      "router": "0x327e80A5eA5A78d1Ce0A497Be4b4f4cd8B3Fafb0",
+      "fromBlock": 50882472,
+      "retiredBlock": 64727471,
+      "abiVersion": 1,
+      "label": "HoodAggregator fee-on-transfer"
+    },
+    {
+      "router": "0xe8753b4690685A2067Af15056dA316ef42691A9a",
+      "fromBlock": 64727471,
+      "retiredBlock": 69162998,
+      "abiVersion": 1,
+      "label": "HoodAggregator 0.25% fee"
+    },
+    {
+      "router": "0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef",
+      "fromBlock": 69162998,
+      "retiredBlock": 0,
+      "abiVersion": 1,
+      "label": "HoodAggregatorV2"
+    }
+  ],
+  "failedFirstAttempt": {
+    "transactionHash": "0x738a50d23ab7384e76b0edd376037c0f0718476642a5ed188a96bc366f83519d",
+    "reason": "constructor compared L2 seed blocks against block.number, which is the L1 block on Arbitrum-based chains"
+  },
+  "sourceVerification": {
+    "sourcify": "exact_match",
+    "sourcifyMatchId": "51571429",
+    "verifiedAt": "2026-09-23T17:18:00Z",
+    "url": "https://repo.sourcify.dev/4663/0x7b592Bf516cE94AE28e24e34d709Cb95fE596005",
+    "blockscout": "pending Sourcify import"
+  }
+}
