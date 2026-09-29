@@ -1,0 +1,23 @@
+{
+  "name": "meow-adapter-verify",
+  "private": true,
+  "description": "Local verification against the real @defillama/sdk version pinned by DefiLlama/dimension-adapters@3d66de5 (5.0.236). Install with `npm ci --ignore-scripts`.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "sync": "node sync.mjs",
+    "typecheck": "node sync.mjs && tsc -p tsconfig.json",
+    "typecheck:files": "tsc -p tsconfig.json --listFiles",
+    "build": "node sync.mjs && tsc -p tsconfig.build.json",
+    "test": "npm run build && node --test --test-reporter=spec \"test/*.test.*\""
+  },
+  "dependencies": {
+    "@defillama/sdk": "5.0.236"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.23",
+    "typescript": "^5.0.0"
+  }
+}

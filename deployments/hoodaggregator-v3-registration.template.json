@@ -1,0 +1,18 @@
+{
+  "_comment": "Release input for `node tools/v3-registration.mjs`. Copy this file, fill every <...> value from the real V3 deployment, and keep the receipt/transaction JSON next to it. The builder refuses any remaining placeholder. Nothing here has been deployed or registered.",
+  "_fromBlock": "Decimal L2 blockNumber from the deployment receipt. Never Solidity block.number and never the receipt's l1BlockNumber.",
+  "_deploymentReceipt": "Path (relative to this file) to the raw eth_getTransactionReceipt result, e.g. `cast receipt <tx> --json --rpc-url $ROBINHOOD_RPC`.",
+  "_deploymentTransaction": "Path to the raw eth_getTransactionByHash result, e.g. `cast tx <tx> --json --rpc-url $ROBINHOOD_RPC`; proves chainId 4663.",
+  "_expectedRuntimeCodeHash": "keccak256 of the frozen V3 artifact's deployed runtime with immutables accounted for; checked against `cast code` as a pre-broadcast gate.",
+  "schema": "meow-router-registration-input/v1",
+  "chainId": 4663,
+  "registry": "0x7b592Bf516cE94AE28e24e34d709Cb95fE596005",
+  "router": "<V3_ROUTER_ADDRESS>",
+  "fromBlock": "<V3_DEPLOYMENT_RECEIPT_L2_BLOCK_NUMBER>",
+  "abiVersion": 1,
+  "label": "HoodAggregatorV3",
+  "deploymentReceipt": "<PATH_TO_V3_DEPLOYMENT_RECEIPT_JSON>",
+  "deploymentTransaction": "<PATH_TO_V3_DEPLOYMENT_TRANSACTION_JSON>",
+  "expectedRuntimeCodeHash": "<V3_FROZEN_ARTIFACT_RUNTIME_KECCAK256>",
+  "retire": []
+}

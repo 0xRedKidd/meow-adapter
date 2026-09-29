@@ -1,0 +1,10 @@
+{
+  "//": "Emit CommonJS like upstream's ts-node runner (tsconfig ts-node.compilerOptions.module = commonjs) so tests run the compiled adapters against the real SDK.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "noEmit": false,
+    "outDir": "build",
+    "rootDir": "upstream"
+  }
+}

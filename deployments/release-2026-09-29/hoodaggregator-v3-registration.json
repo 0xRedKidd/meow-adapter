@@ -1,0 +1,13 @@
+{
+  "schema": "meow-router-registration-input/v1",
+  "chainId": 4663,
+  "registry": "0x7b592Bf516cE94AE28e24e34d709Cb95fE596005",
+  "router": "0xfCf37239321f81Ba0B8181d44D1f605002C71F30",
+  "fromBlock": 75872731,
+  "abiVersion": 1,
+  "label": "HoodAggregatorV3",
+  "deploymentReceipt": "receipt.json",
+  "deploymentTransaction": "transaction.json",
+  "expectedRuntimeCodeHash": "0xa920cd5effda496261063fa1249981c48f4d29957d1277639b865e05d8e9f4bc",
+  "retire": []
+}

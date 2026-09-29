@@ -1,0 +1,186 @@
+{
+  "schema": "meow-router-registration-request/v1",
+  "status": "PREPARED_NOT_BROADCAST",
+  "chainId": 4663,
+  "registry": "0x7b592Bf516cE94AE28e24e34d709Cb95fE596005",
+  "sender": "0x7E4CEFA712BB2080623b96fEf6c1d327FC965553",
+  "function": {
+    "signature": "register(address,uint64,uint32,string)",
+    "selector": "0x5a986cb5",
+    "args": {
+      "router": "0xfCf37239321f81Ba0B8181d44D1f605002C71F30",
+      "fromBlock": 75872731,
+      "abiVersion": 1,
+      "label": "HoodAggregatorV3"
+    }
+  },
+  "calldata": "0x5a986cb5000000000000000000000000fcf37239321f81ba0b8181d44d1f605002c71f30000000000000000000000000000000000000000000000000000000000485b9db000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010486f6f6441676772656761746f72563300000000000000000000000000000000",
+  "value": "0",
+  "evidence": {
+    "deploymentTransactionHash": "0xe3590f7f6ad037eb8d3e8069ba7147112be38f8642eb45b234f79414500ab3ef",
+    "deploymentBlockNumberL2": 75872731,
+    "deploymentBlockHash": "0x541da214dc0dbd47aab8618350a069e8c5f430106c64f24b89b49d4b2124ce9e",
+    "receiptL1BlockNumber": 26084925,
+    "receiptL1BlockNumberNote": "informational only; never used as fromBlock",
+    "deployer": "0x7e4cefa712bb2080623b96fef6c1d327fc965553",
+    "deploymentTransactionChainId": 4663,
+    "receiptSha256": "46f31e6901021a7618f3fb5d98e0081271f1dca3b36ec0609f852e3036b69478",
+    "transactionSha256": "875f4f0658f9ffcfc3723f95a77e229d4268b676f58100090e9555ad9aee2006",
+    "expectedRuntimeCodeHash": "0xa920cd5effda496261063fa1249981c48f4d29957d1277639b865e05d8e9f4bc"
+  },
+  "operations": [
+    "register"
+  ],
+  "notIncluded": [
+    "retire(...): V2 stays registered and unretired as the rollback target in the initial V3 release"
+  ],
+  "preservedRouters": [
+    {
+      "router": "0x6493A49d5b5C5Befe60d6EC7F633fd317545DdDC",
+      "label": "HoodAggregator v1",
+      "fromBlock": 33693446,
+      "retiredBlock": 45247551
+    },
+    {
+      "router": "0xcBA20B3109Ef4944dEAFc265B4b3D38316A3a17a",
+      "label": "HoodAggregator native-v4",
+      "fromBlock": 45247551,
+      "retiredBlock": 50882472
+    },
+    {
+      "router": "0x327e80A5eA5A78d1Ce0A497Be4b4f4cd8B3Fafb0",
+      "label": "HoodAggregator fee-on-transfer",
+      "fromBlock": 50882472,
+      "retiredBlock": 64727471
+    },
+    {
+      "router": "0xe8753b4690685A2067Af15056dA316ef42691A9a",
+      "label": "HoodAggregator 0.25% fee",
+      "fromBlock": 64727471,
+      "retiredBlock": 69162998
+    },
+    {
+      "router": "0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef",
+      "label": "HoodAggregatorV2",
+      "fromBlock": 69162998,
+      "retiredBlock": 0
+    }
+  ],
+  "sequencing": "Broadcast and confirm this registration before any V3 swap, including canaries. The adapter reads routers() at each window's end block, so a V3 swap in any window that ends before the registration block would not be counted.",
+  "preBroadcastGates": [
+    {
+      "id": "chain",
+      "check": "RPC is chain 4663",
+      "command": "cast chain-id --rpc-url $ROBINHOOD_RPC",
+      "expect": "4663",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "owner",
+      "check": "registry owner is the signer that will send this request",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"owner()(address)\" --rpc-url $ROBINHOOD_RPC",
+      "expect": "0x7E4CEFA712BB2080623b96fEf6c1d327FC965553",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "prior-entries",
+      "check": "registry still holds exactly the five recorded routers, in order",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"routers()(address[])\" --rpc-url $ROBINHOOD_RPC",
+      "expect": [
+        "0x6493A49d5b5C5Befe60d6EC7F633fd317545DdDC",
+        "0xcBA20B3109Ef4944dEAFc265B4b3D38316A3a17a",
+        "0x327e80A5eA5A78d1Ce0A497Be4b4f4cd8B3Fafb0",
+        "0xe8753b4690685A2067Af15056dA316ef42691A9a",
+        "0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef"
+      ],
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "prior-count",
+      "check": "no other registration since the recorded deployment",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"count()(uint256)\" --rpc-url $ROBINHOOD_RPC",
+      "expect": "5",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "not-registered",
+      "check": "V3 is not yet registered",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"isRegistered(address)(bool)\" 0xfCf37239321f81Ba0B8181d44D1f605002C71F30 --rpc-url $ROBINHOOD_RPC",
+      "expect": "false",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "v2-active",
+      "check": "V2 is registered and unretired",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"record(address)((address,uint64,uint64,uint32,string))\" 0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef --rpc-url $ROBINHOOD_RPC",
+      "expect": "(0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef, 69162998, 0, 1, \"HoodAggregatorV2\")",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "runtime",
+      "check": "deployed runtime at the V3 address matches the frozen artifact",
+      "command": "cast keccak $(cast code 0xfCf37239321f81Ba0B8181d44D1f605002C71F30 --rpc-url $ROBINHOOD_RPC)",
+      "expect": "0xa920cd5effda496261063fa1249981c48f4d29957d1277639b865e05d8e9f4bc",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "deploy-block",
+      "check": "live receipt still reports this L2 block (no reorg)",
+      "command": "cast receipt 0xe3590f7f6ad037eb8d3e8069ba7147112be38f8642eb45b234f79414500ab3ef blockNumber --rpc-url $ROBINHOOD_RPC",
+      "expect": "75872731",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "deploy-block-hash",
+      "check": "block hash at fromBlock matches the receipt",
+      "command": "cast block 75872731 hash --rpc-url $ROBINHOOD_RPC",
+      "expect": "0x541da214dc0dbd47aab8618350a069e8c5f430106c64f24b89b49d4b2124ce9e",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    },
+    {
+      "id": "no-v3-swaps-yet",
+      "check": "V3 has emitted no Swapped log yet",
+      "command": "cast logs --from-block 75872731 --address 0xfCf37239321f81Ba0B8181d44D1f605002C71F30 0xd6d4f5681c246c9f42c203e287975af1601f8df8035a9251f79aab5c8f09e2f8 --rpc-url $ROBINHOOD_RPC",
+      "expect": "no logs",
+      "status": "PENDING_OPERATOR_VERIFICATION"
+    }
+  ],
+  "broadcastCommandForOperator": "cast send 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"register(address,uint64,uint32,string)\" 0xfCf37239321f81Ba0B8181d44D1f605002C71F30 75872731 1 \"HoodAggregatorV3\" --rpc-url $ROBINHOOD_RPC --from 0x7E4CEFA712BB2080623b96fEf6c1d327FC965553",
+  "postBroadcastChecks": [
+    {
+      "id": "event",
+      "check": "registration receipt has status 0x1 and one RouterRegistered log (topic0 0x58d4d0b3fd93a7d6b502318db07532f7a4363c99b43b6dad17b055c97807ecef) from the registry with topic1 = router"
+    },
+    {
+      "id": "record",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"record(address)((address,uint64,uint64,uint32,string))\" 0xfCf37239321f81Ba0B8181d44D1f605002C71F30 --rpc-url $ROBINHOOD_RPC",
+      "expect": "(0xfCf37239321f81Ba0B8181d44D1f605002C71F30, 75872731, 0, 1, \"HoodAggregatorV3\")"
+    },
+    {
+      "id": "count",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"count()(uint256)\" --rpc-url $ROBINHOOD_RPC",
+      "expect": "6"
+    },
+    {
+      "id": "routers",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"routers()(address[])\" --rpc-url $ROBINHOOD_RPC",
+      "expect": [
+        "0x6493A49d5b5C5Befe60d6EC7F633fd317545DdDC",
+        "0xcBA20B3109Ef4944dEAFc265B4b3D38316A3a17a",
+        "0x327e80A5eA5A78d1Ce0A497Be4b4f4cd8B3Fafb0",
+        "0xe8753b4690685A2067Af15056dA316ef42691A9a",
+        "0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef",
+        "0xfCf37239321f81Ba0B8181d44D1f605002C71F30"
+      ]
+    },
+    {
+      "id": "v2-still-active",
+      "command": "cast call 0x7b592Bf516cE94AE28e24e34d709Cb95fE596005 \"record(address)((address,uint64,uint64,uint32,string))\" 0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef --rpc-url $ROBINHOOD_RPC",
+      "expect": "(0x70f5e4A7a15990472aE75B0F7DB80f1c99D2C1Ef, 69162998, 0, 1, \"HoodAggregatorV2\")"
+    },
+    {
+      "id": "record-registration-block",
+      "check": "store the registration receipt's L2 blockNumber R in the release manifest; the adapter sees V3 in every window whose end block is >= R"
+    }
+  ]
+}

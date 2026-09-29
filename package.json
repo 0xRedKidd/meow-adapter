@@ -1,0 +1,13 @@
+{
+  "name": "meow-defillama-adapter",
+  "private": true,
+  "description": "Local tests and release tooling for the Meow DefiLlama adapter. No runtime dependencies; requires Node 24 (built-in TypeScript type stripping and node:test).",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec \"test/*.test.mjs\"",
+    "registration": "node tools/v3-registration.mjs"
+  }
+}

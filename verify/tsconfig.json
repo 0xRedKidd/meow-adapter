@@ -1,0 +1,23 @@
+{
+  "//": "compilerOptions copied from DefiLlama/dimension-adapters@3d66de5 tsconfig.json (type-check only).",
+  "compilerOptions": {
+    "target": "ES2020",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "allowJs": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "lib": ["ES2019", "DOM"]
+  },
+  "//include": "Upstream's pattern `aggregators/*` matches only files directly in aggregators/, not aggregators/<name>/index.ts; use ** so the adapters are really checked.",
+  "include": ["upstream/adapters/*", "upstream/aggregators/**/*.ts"]
+}
